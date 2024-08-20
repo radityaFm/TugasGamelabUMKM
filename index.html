@@ -27,7 +27,34 @@
         height: 430px;
         object-fit: cover;
       }
+      .about-desc {
+    position: relative;
+    max-height: 60px; /* Default collapsed height */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    text-indent: 1.5px;
+    margin: 20px;
+  }
 
+.about-desc.expanded {
+  max-height: 1000px;
+  transition: max-height 0.5s ease;
+}
+
+.read-more-link {
+  color: rgb(gray, #555, gray);
+  cursor: pointer;
+  font-weight: bold;
+  font-family: roboto;
+  margin-weight: 600;
+}
+
+.more-text {
+  display: inline; /* Set inline display by default to prevent cutting off */
+}
+    .show-more {
+        display: inline; /* Show the additional text */
+    }
       /* Navbar */
       .navbar {
         background-color: rgba(0, 0, 0, 0.5);
@@ -78,20 +105,36 @@
       }
       /*galery*/
       .polaroid {
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 30px;
-        background: #fff;
-        border: 10px solid #fff;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid transparent; /* Transparent border by default */
+  background-color: #ffffff; /* Default background color */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Default shadow */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  width: 100%; /* Ensures full width */
+  max-width: 100%; /* Maintain responsiveness */
+  aspect-ratio: 16 / 9; /* Maintains aspect ratio */
+}
 
-      .polaroid img {
-        display: block;
-        width: 100%;
-        height: 300px; /* Tetapkan tinggi yang sama untuk semua gambar */
-        object-fit: cover;
-      }
+.polaroid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the container without stretching */
+  transition: transform 0.3s ease;
+}
+
+.polaroid:hover {
+  transform: scale(1.05); /* Slight scaling effect */
+  background-color: #f0f0f0; /* Change background color on hover */
+  border-color: #000; /* Change border color on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.polaroid:hover img {
+  transform: scale(1); /* Zoom in the image slightly on hover */
+}
+
       .galeri {
         font-style: sans-serif;
         font-weight: 500;
@@ -293,7 +336,7 @@
       }
       /* Responsive styles */
    /* Untuk perangkat dengan lebar maksimum 575px (ponsel kecil) */
-   @media (max-width: 575px) {
+   @media (min-width: 425px) (max-width:575px) {
   .desc {
     font-size: 10px;
   }
@@ -379,7 +422,7 @@
   .navbar .navbar-nav {
     margin-left: auto; /* Membuat navbar navigation berada di kanan */
   }
-}
+   }
 
 /* Untuk perangkat dengan lebar maksimum 768px (ponsel besar dan tablet kecil) */
 @media (max-width: 768px) {
@@ -444,12 +487,32 @@
     border: 1px solid #fff; /* Warna border putih, jika perlu */
   }
 }
-
-/* Untuk perangkat dengan lebar minimum 769px dan maksimum 1024px (tablet besar dan perangkat desktop kecil) */
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (max-width: 1024px) {
   .navbar-nav {
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
+    width: 100%;
+  }
+
+  .nav-link {
+    margin: 10px 15px;
+  }
+
+  .desc {
+    font-size: 10px;
+  }
+
+  .faq-image {
+    max-height: 300px; /* Adjust max height for tablets */
+  }
+ 
+}
+
+/* Untuk perangkat dengan lebar minimum 769px dan maksimum 1024px (tablet besar dan perangkat desktop kecil) */
+@media (min-width: 769px) and (max-width: 1440px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: end;
     width: 100%;
   }
 
@@ -579,26 +642,27 @@
           </div>
           <div class="container overflow-hidden about-main">
             <div class="row gy-4 gy-md-0 gx-xxl-5">
-              <div class="col-12 col-md-6">
-                <div class="card border-0">
-                  <img class="foto" src="assets/about1" alt="" data-aos="fade-in" />
+                <div class="col-12 col-md-6">
+                    <div class="card border-0">
+                        <img class="foto" src="assets/about1" alt="" data-aos="fade-in" />
+                    </div>
+                </div>       
+                <div class="col-12 col-md-6 my-auto" data-aos="fade-in">
+                  <div class="about-deskripsi">
+                    <p class="about-desc fs-6 my-4" id="aboutDesc">
+                      UMKM Susu Jeli adalah usaha kecil menengah yang fokus pada produksi minuman susu dengan inovasi jeli sehat. Kami berdedikasi untuk menyediakan produk susu yang tidak hanya lezat, tetapi juga bergizi dan menyegarkan.
+                      Menggunakan bahan-bahan alami dan berkualitas tinggi, kami memastikan setiap produk Susu Jeli aman untuk dikonsumsi. Visi kami adalah menjadi pilihan utama konsumen dalam kategori minuman sehat dan menyegarkan. Susu Jeli
+                      hadir dengan berbagai varian rasa yang menarik, cocok untuk segala usia. Kami percaya bahwa kesehatan adalah kunci, oleh karena itu, setiap produk kami bebas dari bahan pengawet dan pewarna buatan.
+                      <span class="more-text">
+                        UMKM Susu Jeli tidak hanya peduli dengan kualitas produk, tetapi juga kesejahteraan komunitas sekitar kami. Kami selalu memastikan bahwa setiap produk Susu Jeli dikemas dengan penuh kasih dan perhatian. Dalam setiap
+                        kemasan Susu Jeli, terkandung komitmen kami untuk memberikan yang terbaik bagi konsumen. Kami berterima kasih atas dukungan konsumen yang telah menjadikan UMKM Susu Jeli sebagai bagian dari kehidupan sehari-hari mereka.
+                      </span>
+                    </p>
+                    <span class="read-more-link" id="readMoreLink" onclick="toggleText()">Read More</span>
+                  </div>
                 </div>
-              </div>
-              <div class="col-12 col-md-6 my-auto" data-aos="fade-in">
-                <div class="about-deskripsi">
-                  <p class="about-desc fs-6" id="about">
-                    UMKM Susu Jeli adalah usaha kecil menengah yang fokus pada produksi minuman susu dengan inovasi jeli sehat. Kami berdedikasi untuk menyediakan produk susu yang tidak hanya lezat, tetapi juga bergizi dan menyegarkan.
-                    Menggunakan bahan-bahan alami dan berkualitas tinggi, kami memastikan setiap produk Susu Jeli aman untuk dikonsumsi. Visi kami adalah menjadi pilihan utama konsumen dalam kategori minuman sehat dan menyegarkan. Susu Jeli
-                    hadir dengan berbagai varian rasa yang menarik, cocok untuk segala usia. Kami percaya bahwa kesehatan adalah kunci, oleh karena itu, setiap produk kami bebas dari bahan pengawet dan pewarna buatan.
-                  </p>
-                  <p class="about-desc fs-6" id="about">
-                    UMKM Susu Jeli tidak hanya peduli dengan kualitas produk, tetapi juga kesejahteraan komunitas sekitar kami. Kami selalu memastikan bahwa setiap produk Susu Jeli dikemas dengan penuh kasih dan perhatian. Dalam setiap
-                    kemasan Susu Jeli, terkandung komitmen kami untuk memberikan yang terbaik bagi konsumen. Kami berterima kasih atas dukungan konsumen yang telah menjadikan UMKM Susu Jeli sebagai bagian dari kehidupan sehari-hari mereka.
-                  </p>
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
         </section>
         <div class="container mt-5" id="galeri">
           <h2 class="galeri text-center mb-4 mt-5">Galery</h2>
@@ -632,8 +696,6 @@
             </div>
           </div>
         </div>
-        <br />
-        <br />
         <section id="product">
           <div class="container mt-5 my-3">
             <ul class="nav nav-tabs" id="menuTabs" role="tablist">
@@ -1025,6 +1087,33 @@
         // Listen for scroll events
         window.addEventListener('scroll', onScroll);
       });
+      function toggleText() {
+    var moreText = document.querySelector('.more-text');
+    var link = document.querySelector('.read-more-link');
+    var aboutDesc = document.querySelector('.about-desc');
+
+    if (moreText.style.display === 'none' || moreText.style.display === '') {
+        moreText.style.display = 'inline'; // Show the extra text
+        aboutDesc.style.maxHeight = 'none'; // Allow the full text to be visible
+        link.textContent = 'Read Less';
+    } else {
+        moreText.style.display = 'none'; // Hide the extra text
+        aboutDesc.style.maxHeight = '60px'; // Limit height to hide overflow text
+        link.textContent = 'Read More';
+    }
+}
+function toggleText() {
+  var desc = document.getElementById("aboutDesc");
+  var readMoreLink = document.getElementById("readMoreLink");
+
+  if (desc.classList.contains("expanded")) {
+    desc.classList.remove("expanded");
+    readMoreLink.innerText = "Read More";
+  } else {
+    desc.classList.add("expanded");
+    readMoreLink.innerText = "Read Less";
+  }
+}
     </script>
   </body>
 </html>
