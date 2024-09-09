@@ -1,0 +1,36 @@
+{
+    "background.windowBackgrounds": [
+        "c:/Users/RADITYA FEBRIANDARU/Downloads/WhatsApp Image 2024-09-06 at 17.37.03.jpeg"
+    ],
+    "background.sidebarBackgrounds": [],
+    "background.backgroundAlignment": [
+        "Manual",
+        "Center Center",
+        "Center Center",
+        "Center Center"
+    ],
+    "background.backgroundAlignmentValue": [
+        "50%",
+        "50%",
+        "50%",
+        "50%"
+    ],
+    "background.backgroundSize": [
+        "Cover",
+        "Cover",
+        "Cover",
+        "Cover"
+    ],
+    "background.backgroundSizeValue": [
+        "100%",
+        "100%",
+        "100%",
+        "100%"
+    ],
+    "background.backgroundRepeat": [
+        "No Repeat",
+        "No Repeat",
+        "No Repeat",
+        "No Repeat"
+    ]
+}
