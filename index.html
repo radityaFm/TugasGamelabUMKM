@@ -176,50 +176,65 @@
         width: 100%;
         object-fit: cover;
       }
+      .about {
+        border-radius: 15px;
+      }
       /*galery*/
+      .gallery {
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Jarak antar baris */
+      }
+
+      .gallery-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px; /* Jarak antar kolom di satu baris */
+      }
+
       .polaroid {
         position: relative;
+        width: 48%; /* Membuat dua kolom, masing-masing mengambil sekitar 50% */
+        height: 280px; /* Atur tinggi lebih kecil */
         overflow: hidden;
         border-radius: 10px;
-        border: 1px solid transparent; /* Transparent border by default */
-        background-color: #ffffff; /* Default background color */
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Default shadow */
+        background-color: #ffffff;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-        width: 100%; /* Ensures full width */
-        max-width: 100%; /* Maintain responsiveness */
-        height: 270px;
-        margin-bottom: 90px;
+      }
+
+      .gallery-row:nth-child(2) .polaroid {
+        width: 31%; /* Membuat tiga kolom, masing-masing sekitar 33% */
+        height: 180px; /* Sedikit lebih kecil untuk baris kedua */
       }
 
       .polaroid img {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Ensures the image covers the container without stretching */
+        object-fit: cover;
         transition: transform 0.3s ease;
       }
 
       .polaroid:hover {
-        transform: scale(1.05); /* Slight scaling effect */
-        background-color: #f0f0f0; /* Change background color on hover */
-        border-color: #000; /* Change border color on hover */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+        transform: scale(1.05);
+        background-color: #f0f0f0;
+        border-color: #000;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       }
 
       .polaroid:hover img {
-        transform: scale(1); /* Zoom in the image slightly on hover */
+        transform: scale(1);
       }
 
-      .galeri {
-        font-style: sans-serif;
-        font-weight: 500;
-        font-size: 30px;
-      }
-      .caption {
-        padding: 10px;
-        text-align: center;
-        font-size: 1.2em;
-        font-weight: bold;
-        color: #333;
+      .overlay-text {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
       }
       /* Nav-tabs */
       .nav-tabs .nav-link {
@@ -700,7 +715,7 @@
         }
       }
 
-      @media (max-width: 1024px) {
+      @media (max-width: 1023px) {
         .navbar-nav {
           display: flex;
           justify-content: end;
@@ -722,26 +737,61 @@
         .accordion {
           max-height: 300px;
         }
-        .nav-links {
-          display: flex; /* Tampilkan navigasi default */
+
+        .hamburger-icon {
+          display: flex; /* Tampilkan tombol hamburger pada layar kecil */
         }
 
-        .hamburger {
-          display: none; /* Sembunyikan tombol hamburger */
+        /* Sembunyikan navigasi pada layar kecil, hanya tampil jika di-toggle */
+        .navbar-collapse {
+          display: none;
         }
+
+        /* Tampilkan navigasi setelah hamburger diklik */
+        .navbar-collapse.show {
+          display: block; /* Tampilkan menu setelah hamburger diklik */
+        }
+
         .about {
           width: 470px;
           border-radius: 15px;
         }
+
+        /* Menu navigasi bertumpuk di mobile */
+        .nav-links.show {
+          display: flex;
+          flex-direction: column;
+        }
       }
 
-      /* Untuk menampilkan menu setelah hamburger diklik */
-      .nav-links.show {
-        display: flex;
-        flex-direction: column; /* Buat link bertumpuk di mobile */
+      /* Untuk layar 1024px ke atas (laptop dan desktop) */
+      @media (min-width: 1024px) {
+        .hamburger-icon {
+          display: none; /* Sembunyikan hamburger pada layar besar */
+        }
+
+        /* Tampilkan navigasi default pada layar besar */
+        .navbar-collapse {
+          display: flex; /* Navigasi tampil secara default */
+          justify-content: flex-end;
+          width: 100%;
+        }
+
+        /* Styling untuk navigasi di layar besar */
+        .navbar-nav {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        .nav-link {
+          margin: 0 15px;
+          font-size: 16px;
+        }
       }
 
-      @media (min-width: 769px) and (max-width: 2560px) {
+      /* Untuk layar 1440px ke atas (monitor besar atau 4K) */
+      @media (min-width: 1440px) and (max-width: 2560px) {
         .navbar-nav {
           display: flex;
           justify-content: end;
@@ -779,21 +829,6 @@
           max-width: 90%;
         }
 
-        .col-md-6 {
-          flex: 0 0 50%;
-          max-width: 50%;
-        }
-
-        .col-md-4 {
-          flex: 0 0 33.3333%;
-          max-width: 33.3333%;
-        }
-
-        .col-md-6,
-        .col-lg-4 {
-          flex: 0 0 auto;
-        }
-
         .parallax {
           margin: 0;
           padding: 0;
@@ -804,21 +839,18 @@
           background-color: #fff;
           border: 1px solid #fff;
         }
-        .nav-links {
-          display: flex; /* Tampilkan navigasi default */
+
+        .hamburger-icon {
+          display: none; /* Sembunyikan hamburger pada layar besar */
         }
 
-        .hamburger {
-          display: none; /* Sembunyikan tombol hamburger */
+        /* Tampilkan navigasi default pada layar besar */
+        .navbar-collapse {
+          display: flex; /* Navigasi tampil secara default */
+          justify-content: flex-end;
+          width: 100%;
         }
       }
-
-      /* Untuk menampilkan menu setelah hamburger diklik */
-      .nav-links.show {
-        display: flex;
-        flex-direction: column; /* Buat link bertumpuk di mobile */
-      }
-
       @media (min-width: 2560px) {
         .navbar > .container,
         .navbar > .container-fluid {
@@ -881,7 +913,7 @@
           <img src="image/logo.png" alt="Logo" />
         </a>
         <!-- Hamburger Icon (Visible on mobile and tablet only) -->
-        <div class="hamburger-icon d-md-0" id="hamburger">
+        <div class="hamburger-icon d-lg-none" id="hamburger">
           <span></span>
           <span></span>
           <span></span>
@@ -961,7 +993,7 @@
         </div>
       </section>
       <div class="container mt-5" id="galeri">
-        <h2 class="galeri text-center mb-4 mt-5">Produk kami</h2>
+        <h2 class="galeri fs-3 text-secondary mb-2 mt-5 my-2 text-uppercase text-center">Produk kami</h2>
         <!-- konten -->
         <section id="product">
           <div class="container mt-5 my-3">
@@ -1057,29 +1089,30 @@
             </div>
           </div>
         </section>
-        <div class="row collage-gallery" data-aos="fade-in">
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="polaroid position-relative">
-              <img src="image/galeri1.png" alt="Susu jeli buble gum" class="img-fluid" />
+        <h2 class="fs-3 text-secondary mb-2 mt-5 text-uppercase text-center">Galeri produk kami</h2>
+        <div class="gallery mt-5 my-3" data-aos="fade-in">
+          <div class="gallery-row">
+            <div class="polaroid">
+              <img src="image/galeri1.png" alt="Susu jeli buble gum" />
               <div class="overlay-text">Susu jeli buble gum</div>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 mb-4">
-            <div class="polaroid position-relative">
-              <img src="image/galeri2.png" alt="Susu jeli vanilla" class="img-fluid" />
+            <div class="polaroid">
+              <img src="image/galeri2.png" alt="Susu jeli vanilla" />
               <div class="overlay-text">Susu jeli vanilla</div>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12 mb-4">
-            <div class="polaroid position-relative">
-              <img src="image/yogurt3.jpeg" alt="Variant yogurt medium" class="img-fluid" />
+          <div class="gallery-row mt-4 my-2">
+            <div class="polaroid">
+              <img src="image/yogurt3.jpeg" alt="Variant yogurt medium" />
               <div class="overlay-text">Variant yogurt medium</div>
             </div>
-          </div>
-          <div class="col-md-6 col-sm-12 mb-4">
-            <div class="polaroid position-relative">
-              <img src="image/yogurt2.jpeg" alt="Variant yogurt large" class="img-fluid" />
+            <div class="polaroid">
+              <img src="image/yogurt2.jpeg" alt="Variant yogurt large" />
               <div class="overlay-text">Variant yogurt large</div>
+            </div>
+            <div class="polaroid">
+              <img src="image/galeri3.png" alt="Susu jeli stroberi" />
+              <div class="overlay-text">Susu jeli stroberi</div>
             </div>
           </div>
         </div>
@@ -1236,6 +1269,7 @@
     <footer id="footer" class="footer position-relative light-background">
       <div class="container footer-top">
         <div class="row gy-4">
+          <!-- Bagian About dan Kontak -->
           <div class="col-lg-4 col-md-6 footer-about">
             <a href="index.html" class="logo d-flex align-items-center fs-3" style="text-decoration: none; color: white">
               <span class="sitename fs-1">QuickStart</span>
@@ -1247,11 +1281,17 @@
             <div class="social-links d-flex mt-4"></div>
           </div>
 
-          <div class="col-lg-2 col-md-3 footer-links"></div>
+          <!-- Bagian Links Kosong -->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <!-- Tambahkan konten link jika diperlukan -->
+          </div>
 
-          <div class="col-lg-2 col-md-3 footer-links"></div>
+          <div class="col-lg-2 col-md-3 footer-links">
+            <!-- Tambahkan konten link jika diperlukan -->
+          </div>
 
-          <div class="col-lg-4 col-md-12 footer-newsletter my-auto mx-auto d-flex flex-column align-items-left">
+          <!-- Bagian Maps dan Alamat -->
+          <div class="col-lg-4 col-md-12 footer-newsletter d-flex flex-column align-items-left">
             <iframe
               class="map"
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d8766.925079314353!2d110.41350367545591!3d-7.027570053745184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMDEnNDQuOCJTIDExMMKwMjUnMzkuOCJF!5e1!3m2!1sen!2sid!4v1721807800851!5m2!1sen!2sid"
@@ -1265,11 +1305,14 @@
           </div>
         </div>
       </div>
+
+      <!-- Bagian Copyright -->
       <div class="container copyright text-center mt-4">
-        <p>© <span>2024</span><strong class="px-1 sitename">umkm mbak G</strong><span>All rights reserved</span></p>
+        <p>© <span>2024</span><strong class="px-1 sitename">umkm mbak G</strong><span> All rights reserved</span></p>
         <div class="credits"></div>
       </div>
     </footer>
+
     <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
     <script src="aos-master/dist/aos.js"></script>
     <script>
@@ -1277,11 +1320,30 @@
       document.addEventListener('DOMContentLoaded', function () {
         const hamburger = document.getElementById('hamburger');
         const navbarCollapse = document.getElementById('navbarNav');
+        const mediaQuery = window.matchMedia('(min-width: 1024px)');
 
+        // Fungsi untuk mengatur navigasi berdasarkan ukuran layar
+        function handleScreenResize() {
+          if (mediaQuery.matches) {
+            // Tampilan di layar besar (laptop dan desktop)
+            hamburger.style.display = 'none'; // Sembunyikan hamburger
+            navbarCollapse.classList.add('show'); // Tampilkan navigasi
+          } else {
+            // Tampilan di layar kecil (tablet dan hp)
+            hamburger.style.display = 'flex'; // Tampilkan hamburger
+            navbarCollapse.classList.remove('show'); // Sembunyikan navigasi
+          }
+        }
+
+        // Jalankan fungsi ini ketika halaman pertama kali dimuat
+        handleScreenResize();
+
+        // Jalankan fungsi ini ketika ukuran layar berubah
+        mediaQuery.addListener(handleScreenResize);
+
+        // Toggle navigasi saat hamburger di klik pada layar kecil
         hamburger.addEventListener('click', function () {
-          // Toggle the 'active' class for hamburger icon
           hamburger.classList.toggle('active');
-          // Toggle the 'show' class for navbar collapse
           navbarCollapse.classList.toggle('show');
         });
       });
